@@ -1,7 +1,8 @@
 // config.js
 
 export const GITHUB_CONFIG = {
-    owner: 'giorgio-casciaro', // Sostituisci con il tuo username GitHub
-    repo: 'food-est',        // Sostituisci con il nome del tuo repository
+    url: 'https://foodest23.github.io/menu/',
+    owner: 'foodest23', // Sostituisci con il tuo username GitHub
+    repo: 'menu',        // Sostituisci con il nome del tuo repository
     branch: 'main'                 // Sostituisci con il nome del branch principale (es. 'main' o 'master')
 };

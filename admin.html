@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="token">Personal Access Token:</label>
+            <input type="text" id="token" name="token" required>
+            <label>
+                <input type="checkbox" id="remember-me"> Remember Me
+            </label>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="admin-container" style="display:none;">
+
+    <header>
+        <h1>Admin Panel</h1>
+        <button id="logout-button">Logout</button>
+        <button id="upload-button">Upload File</button>
+        <button id="download-button">Download File</button>
+    </header>
+
+    <main>
+        <section id="update-info">
+            <h2>Update Site Information</h2>
+            <form id="update-form">
+                <!-- Form fields for updating information -->
+            </form>
+        </section>
+
+        <section id="upload-files">
+            <h2>Upload Files</h2>
+            <input type="file" id="file-upload" />
+            <button id="upload-btn">Upload</button>
+        </section>
+
+        <section id="update-location">
+            <h2>Update Location</h2>
+            <div id="admin-map"></div>
+            <button id="save-location-btn">Save Location</button>
+        </section>
+
+        <section id="manage-reviews">
+            <h2>Manage Reviews</h2>
+            <div id="review-list-admin"></div>
+            <button id="add-review-btn">Add Review</button>
+        </section>
+    </main>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>

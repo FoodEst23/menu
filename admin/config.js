@@ -6,3 +6,4 @@ export const GITHUB_CONFIG = {
     repo: 'menu',        // Sostituisci con il nome del tuo repository
     branch: 'main'                 // Sostituisci con il nome del branch principale (es. 'main' o 'master')
 };
+export const DATA_FILE_PATH =  'data/site.json';

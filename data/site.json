@@ -1,5 +1,5 @@
 {
-    "menus": {
+    "menus": [{
         "id": "MenuFesta",
         "name": "Menu festa",
         "description": "Drinks",
@@ -10,7 +10,7 @@
                 "products": ["Cola"]
             }
         ]
-    },
+    }],
     "products": [
                     {
                         "id": "Cola",

@@ -5,8 +5,53 @@ import { GITHUB_CONFIG } from './config.js';
 
 const GITHUB_API_URL = 'https://api.github.com';
 
-async function getFileSha(path) {
-    const token = getToken();
+
+export async function deleteFileFromGithub(token, path) {
+    const url = `${GITHUB_API_URL}/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}`;
+
+    const sha = await getFileSha(token, path);
+
+    if (!sha) {
+        throw new Error('File not found');
+    }
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({
+            message: 'Delete file',
+            sha: sha
+        })
+    });
+
+    if (response.status !== 200) {
+        throw new Error('Failed to delete file');
+    }
+}
+
+export async function getFilesListFromGithub(token, directoryPath) {
+    const url = `${GITHUB_API_URL}/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${directoryPath}`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+
+    if (response.status !== 200) {
+        throw new Error('Failed to get files list');
+    }
+
+    const data = await response.json();
+    return data.map(file => file.name);
+}
+
+export async function getFileSha(token, path) {
     if (!token) {
         throw new Error('GitHub token is not available');
     }
@@ -34,13 +79,12 @@ async function getFileSha(path) {
     return data.sha;
 }
 
-export async function uploadFileToGithub(path, content, message, encodeBase64 = true) {
-    const token = getToken();
+export async function uploadFileToGithub(token, path, content, message, encodeBase64 = true) {
     if (!token) {
         throw new Error('GitHub token is not available');
     }
 
-    const sha = await getFileSha(path);
+    const sha = await getFileSha(token,path);
 
     const url = `${GITHUB_API_URL}/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}`;
     
@@ -74,8 +118,7 @@ export async function uploadFileToGithub(path, content, message, encodeBase64 = 
     return await response.json();
 }
 
-export async function downloadFileFromGithub(path) {
-    const token = getToken();
+export async function downloadFileFromGithub(token,path) {
     if (!token) {
         throw new Error('GitHub token is not available');
     }

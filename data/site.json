@@ -1,36 +1,78 @@
 {
     "menus": [
         {
-            "id": "MenuFesta",
-            "name": "Menu festa",
-            "description": "Drinks",
-            "categories": [
+            "id": "MenuPrincipale",
+            "name": "Menu Principale",
+            "description": "Menu Principale",
+            "products": [
                 {
-                    "name": "Drinks",
-                    "description": "Drinks",
-                    "products": [
-                        "Cola"
-                    ]
+                    "id": "Cola"
+                },
+                {
+                    "id": "Panino"
                 }
             ]
+        },
+        {
+            "id": "MenuFestaPatronale",
+            "name": "Menu Festa Patronale",
+            "description": "Menu festa",
+            "products": [
+                {
+                    "id": "Cola",
+                    "price": 2.5
+                },
+                {
+                    "id": "Panino",
+                    "price": 3.5
+                }
+            ]
+        }
+    ],
+    "productsCategories": [
+        {
+            "id": "drinks",
+            "name": "Drinks",
+            "description": "Bevande"
+        },
+        {
+            "id": "food",
+            "name": "Food",
+            "description": "Cibi"
         }
     ],
     "products": [
         {
             "id": "Cola",
             "name": "Cola",
+            "category": "drinks",
             "price": 1.5,
-            "photo": "path/to/photo.jpg",
+            "photo": "photo.jpg",
             "description": "Refreshing cola drink",
-            "active": "Refreshing cola drink",
+            "active": true,
             "ingredients": [
                 "Water",
                 "Sugar",
                 "Carbon Dioxide"
             ]
+        },
+        {
+            "id": "Panino",
+            "name": "Panino",
+            "category": "food",
+            "price": 2.5,
+            "photo": "photo.jpg",
+            "description": "Delicious sandwich",
+            "active": true,
+            "ingredients": [
+                "Bread",
+                "Ham",
+                "Cheese",
+                "Lettuce"
+            ]
         }
     ],
-    "activeMenu": "MenuFesta",
+    "activeMenu": "MenuFestaPatronale",
     "location": {
         "latitude": 40.7128,
         "longitude": -74.0060

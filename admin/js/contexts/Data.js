@@ -16,22 +16,30 @@ export const DataProvider = ({ children }) => {
         console.log('DataProvider loadData:', newData,content);
         setData(newData);
     };
-    const uploadFile = (path,file) =>new Promise((resolve, reject) => {
+    const saveData = async () => {
+        console.log('DataProvider saveData:', data);
+        const content = JSON.stringify(data);
+        await uploadFileToGithub(token, 'data/site.json', content, 'Update at '+new Date().toISOString(),true);
+        console.log('DataProvider saveData - Data saved successfully');
+    }
+    const uploadFileFromForm = (path,file) =>new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = async function (event) {
             const base64Content = event.target.result.split(',')[1]; // Get Base64 string
             try {
                 const result = await uploadFileToGithub(token,path, base64Content, `Upload at ${new Date().toISOString()}`,true);
-                console.log('DataProvider uploadFile - File uploaded successfully:', result);
+                console.log('DataProvider uploadFileFromForm - File uploaded successfully:', result);
                 resolve(result);
             } catch (error) {
-                console.error('DataProvider uploadFile - Error uploading file:', error);
+                console.error('DataProvider uploadFileFromForm - Error uploading file:', error);
                 reject(error);
             }
         };
         reader.readAsDataURL(file);
-        
     })  
+    const uploadFile = async (path,content,isBase64Content) => {
+        await uploadFileToGithub(token,path, content, `Upload at ${new Date().toISOString()}`,isBase64Content);
+    }  
 
     const getFilesList = async (directoryPath) => {
         const files = await getFilesListFromGithub(token, directoryPath);
@@ -49,7 +57,7 @@ export const DataProvider = ({ children }) => {
     }, [token]);
 
     return html`
-        <${DataContext.Provider} value=${{ data, setData, uploadFile, deleteFile, getFilesList  }}>
+        <${DataContext.Provider} value=${{ data, setData, uploadFile,  uploadFileFromForm, deleteFile, getFilesList, saveData  }}>
             ${children}
         <//>
     `;

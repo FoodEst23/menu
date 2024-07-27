@@ -1,6 +1,5 @@
 // github.js
 
-import { getToken } from './user.js';
 import { GITHUB_CONFIG } from './config.js';
 
 const GITHUB_API_URL = 'https://api.github.com';

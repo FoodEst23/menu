@@ -4,7 +4,7 @@ import { DataContext, DataProvider } from '../contexts/Data.js';
  
 
 export const FilesUpload = ({multiple}) => {
-    const { uploadFile } = useContext(DataContext);
+    const { uploadFileFromForm } = useContext(DataContext);
 
     return html`
        <div class="upload-files">
@@ -15,7 +15,7 @@ export const FilesUpload = ({multiple}) => {
                     console.log('App uploadFiles onSubmit', e.target.fileUpload.files[0]);
                     for (const file of files) {
                         console.log('App uploadFiles file', file);
-                        const result = await uploadFile(`contents/${file.name}`, file);
+                        const result = await uploadFileFromForm(`contents/${file.name}`, file);
                         console.log('App uploadFiles result', result);
                     }
                 }}>
